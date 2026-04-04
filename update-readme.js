@@ -85,8 +85,8 @@ function generateTable() {
 function updateReadme() {
     const currentReadme = fs.readFileSync(readmePath, 'utf-8');
     
-    const startMarker = '<!-- START TABLE -->';
-    const endMarker = '<!-- END TABLE -->';
+    const startMarker = '<!-- TABLE_START -->';
+    const endMarker = '<!-- TABLE_END -->';
 
     const startIndex = currentReadme.indexOf(startMarker);
     const endIndex = currentReadme.indexOf(endMarker);
