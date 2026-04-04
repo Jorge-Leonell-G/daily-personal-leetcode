@@ -5,4 +5,5 @@ Colección personal de problemas de programación dentro de Leetcode, resueltos 
 ## Progreso diario
 
 <!-- TABLE_START -->
+
 <!-- TABLE_END -->
