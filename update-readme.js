@@ -78,14 +78,14 @@ function generateTable() {
 function updateReadme() {
     const currentReadme = fs.readFileSync(readmePath, 'utf-8');
     
-    const startMarker = '';
-    const endMarker = '';
+    const startMarker = '<!--';
+    const endMarker = '-->';
 
     const startIndex = currentReadme.indexOf(startMarker);
     const endIndex = currentReadme.indexOf(endMarker);
 
     if (startIndex === -1 || endIndex === -1) {
-        console.error("No se encontraron los marcadores y en el README.md");
+        console.error("No se encontraron los marcadores ocultos HTML en el README.md");
         return;
     }
 
@@ -97,7 +97,7 @@ function updateReadme() {
     const newReadme = beforeTable + newTable + afterTable;
     
     fs.writeFileSync(readmePath, newReadme);
-    console.log("README.md actualizado exitosamente con la nueva tabla.");
+    console.log("README.md actualizado exitosamente con la nueva tabla :D");
 }
 
 updateReadme();
