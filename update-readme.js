@@ -21,14 +21,16 @@ const languageMap = {
 
 function generateTable() {
     let tableLines = [
-        '| Problema | Dificultad | Categoría | Fecha | Lenguaje | Enlace |',
-        '| :--- | :--- | :--- | :--- | :--- | :--- |'
+        '| # | Problema | Dificultad | Categoría | Fecha | Lenguaje | Enlace |',
+        '| :--- | :--- | :--- | :--- | :--- | :--- | :--- |'
     ];
 
     const items = fs.readdirSync(repoRoot);
     const folders = items.filter(item => {
         return fs.statSync(path.join(repoRoot, item)).isDirectory() && /^\d+_/.test(item);
     });
+
+    let dailyCount = 1; 
 
     folders.forEach(folder => {
         const folderPath = path.join(repoRoot, folder);
@@ -50,24 +52,29 @@ function generateTable() {
             const categoryMatch = content.match(categoryRegex);
 
             if (problemMatch && difficultyMatch) {
-                const problem = problemMatch[1].trim();
-                const difficulty = difficultyMatch[1].trim();
-                
+                // se evalua si el problema es tipo daily
                 const isDaily = dailyMatch && dailyMatch[1].trim().toLowerCase() === 'yes';
-                const displayProblem = isDaily ? `🌟 ${problem}` : problem;
-                
-                const date = dateMatch ? dateMatch[1].trim() : '-';
-                const link = linkMatch ? linkMatch[1].trim() : '#';
-                const leetcodeLink = link !== '#' ? `[Ir a LeetCode](${link})` : '-';
-                
-                // Se emplea la categoría del comentario. Si no existe, entonces se usa el nombre de la carpeta por defecto
-                const categoryName = categoryMatch ? categoryMatch[1].trim() : folder.replace(/^\d+_/, '').replace(/_/g, ' ');
-                
-                const relativePath = `./${folder}/${file}`.replace(/ /g, '%20');
-                const ext = path.extname(file);
-                const langName = languageMap[ext];
 
-                tableLines.push(`| ${displayProblem} | ${difficulty} | ${categoryName} | ${date} | [${langName}](${relativePath}) | ${leetcodeLink} |`);
+                // Solo se procesa y agrega a la tabla si isDaily es verdadero
+                if (isDaily) {
+                    const problem = problemMatch[1].trim();
+                    const difficulty = difficultyMatch[1].trim();
+                    
+                    const date = dateMatch ? dateMatch[1].trim() : '-';
+                    const link = linkMatch ? linkMatch[1].trim() : '#';
+                    const leetcodeLink = link !== '#' ? `[Ir a LeetCode](${link})` : '-';
+                    
+                    const categoryName = categoryMatch ? categoryMatch[1].trim() : folder.replace(/^\d+_/, '').replace(/_/g, ' ');
+                    
+                    const relativePath = `./${folder}/${file}`.replace(/ /g, '%20');
+                    const ext = path.extname(file);
+                    const langName = languageMap[ext];
+
+                    // dailyCount al inicio de la fila 
+                    tableLines.push(`| ${dailyCount} | ${problem} | ${difficulty} | ${categoryName} | ${date} | [${langName}](${relativePath}) | ${leetcodeLink} |`);
+                    
+                    dailyCount++;
+                }
             }
         });
     });
@@ -78,8 +85,8 @@ function generateTable() {
 function updateReadme() {
     const currentReadme = fs.readFileSync(readmePath, 'utf-8');
     
-    const startMarker = '<!-- TABLE_START -->';
-    const endMarker = '<!-- TABLE_END -->';
+    const startMarker = '<!-- START TABLE -->';
+    const endMarker = '<!-- END TABLE -->';
 
     const startIndex = currentReadme.indexOf(startMarker);
     const endIndex = currentReadme.indexOf(endMarker);
