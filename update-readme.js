@@ -2,17 +2,26 @@ const fs = require('fs');
 const path = require('path');
 
 const repoRoot = __dirname;
-const readmePath = path.join(repoRoot, 'README.md'); // ruta al README.md al mismo nivel del script
+const readmePath = path.join(repoRoot, 'README.md');
 
-// regex para busqueda de la etiqueta "Daily"
 const problemRegex = /\* Problem:\s*(.*)/;
 const difficultyRegex = /\* Difficulty:\s*(.*)/;
-const dailyRegex = /\* Daily:\s*(.*)/i; 
+const dailyRegex = /\* Daily:\s*(.*)/i;
+const dateRegex = /\* Date:\s*(.*)/;
+const linkRegex = /\* Link:\s*(.*)/;
+
+// Mapa de extensiones soportadas
+const languageMap = {
+    '.js': 'JavaScript',
+    '.py': 'Python',
+    '.java': 'Java',
+    '.cpp': 'C++'
+};
 
 function generateTable() {
     let tableLines = [
-        '| Problema | Dificultad | Categoría | Solución |',
-        '| :--- | :--- | :--- | :--- |'
+        '| Problema | Dificultad | Categoría | Fecha | Lenguaje | Enlace |',
+        '| :--- | :--- | :--- | :--- | :--- | :--- |'
     ];
 
     const items = fs.readdirSync(repoRoot);
@@ -22,7 +31,13 @@ function generateTable() {
 
     folders.forEach(folder => {
         const folderPath = path.join(repoRoot, folder);
-        const files = fs.readdirSync(folderPath).filter(file => file.endsWith('.js'));
+        
+        // se revisa si el archivo es de un lenguaje soportado antes de procesarlo
+        const files = fs.readdirSync(folderPath).filter(file => {
+            const ext = path.extname(file);
+            return languageMap.hasOwnProperty(ext);
+        });
+        
         const categoryName = folder.replace(/^\d+_/, '').replace(/_/g, ' ');
 
         files.forEach(file => {
@@ -31,21 +46,28 @@ function generateTable() {
 
             const problemMatch = content.match(problemRegex);
             const difficultyMatch = content.match(difficultyRegex);
-            
-            const dailyMatch = content.match(dailyRegex); //match para coincidencia de la etiqueta "Daily"
+            const dailyMatch = content.match(dailyRegex);
+            const dateMatch = content.match(dateRegex);
+            const linkMatch = content.match(linkRegex);
 
             if (problemMatch && difficultyMatch) {
                 const problem = problemMatch[1].trim();
                 const difficulty = difficultyMatch[1].trim();
                 
                 const isDaily = dailyMatch && dailyMatch[1].trim().toLowerCase() === 'yes';
-                
-                // icono para distinguir problemas diarios
                 const displayProblem = isDaily ? `🌟 ${problem}` : problem;
                 
+                const date = dateMatch ? dateMatch[1].trim() : '-';
+                const link = linkMatch ? linkMatch[1].trim() : '#';
+                const leetcodeLink = link !== '#' ? `[Ir a LeetCode](${link})` : '-';
+                
                 const relativePath = `./${folder}/${file}`.replace(/ /g, '%20');
+                
+                // se obtiene la extensión del archivo para determinar el lenguaje
+                const ext = path.extname(file);
+                const langName = languageMap[ext];
 
-                tableLines.push(`| ${displayProblem} | ${difficulty} | ${categoryName} | [JavaScript](${relativePath}) |`);
+                tableLines.push(`| ${displayProblem} | ${difficulty} | ${categoryName} | ${date} | [${langName}](${relativePath}) | ${leetcodeLink} |`);
             }
         });
     });
@@ -56,7 +78,6 @@ function generateTable() {
 function updateReadme() {
     const currentReadme = fs.readFileSync(readmePath, 'utf-8');
     
-    // marcadores para identificar dónde insertar la tabla en el README.md
     const startMarker = '';
     const endMarker = '';
 
@@ -76,7 +97,7 @@ function updateReadme() {
     const newReadme = beforeTable + newTable + afterTable;
     
     fs.writeFileSync(readmePath, newReadme);
-    console.log("README.md file updated successfully!");
+    console.log("README.md actualizado exitosamente con la nueva tabla.");
 }
 
 updateReadme();

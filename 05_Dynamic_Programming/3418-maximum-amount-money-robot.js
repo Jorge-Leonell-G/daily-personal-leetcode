@@ -2,10 +2,11 @@
  * Problem: 3418. Maximum Amount of Money Robot Can Earn
  * Difficulty: Medium
  * Category: Array, Dynamic Programming
- * Link: https://leetcode.com/problems/maximum-amount-of-money-robot-can-earn/description/?envType=problem-list-v2&envId=array
+ * Daily: Yes
+ * Date: 01/04/2026
+ * Link: https://leetcode.com/problems/maximum-amount-of-money-robot-can-earn/description/
  * Time Complexity: O(m x n)
  * Space Complexity: O(m x n x 3)
- * Daily Challenge: Yes (01/04/2026)
  */
 
 /**
