@@ -9,6 +9,7 @@ const difficultyRegex = /\* Difficulty:\s*(.*)/;
 const dailyRegex = /\* Daily:\s*(.*)/i;
 const dateRegex = /\* Date:\s*(.*)/;
 const linkRegex = /\* Link:\s*(.*)/;
+const categoryRegex = /\* Category:\s*(.*)/i;
 
 // Mapa de extensiones soportadas
 const languageMap = {
@@ -32,13 +33,10 @@ function generateTable() {
     folders.forEach(folder => {
         const folderPath = path.join(repoRoot, folder);
         
-        // se revisa si el archivo es de un lenguaje soportado antes de procesarlo
         const files = fs.readdirSync(folderPath).filter(file => {
             const ext = path.extname(file);
             return languageMap.hasOwnProperty(ext);
         });
-        
-        const categoryName = folder.replace(/^\d+_/, '').replace(/_/g, ' ');
 
         files.forEach(file => {
             const filePath = path.join(folderPath, file);
@@ -49,6 +47,7 @@ function generateTable() {
             const dailyMatch = content.match(dailyRegex);
             const dateMatch = content.match(dateRegex);
             const linkMatch = content.match(linkRegex);
+            const categoryMatch = content.match(categoryRegex);
 
             if (problemMatch && difficultyMatch) {
                 const problem = problemMatch[1].trim();
@@ -61,9 +60,10 @@ function generateTable() {
                 const link = linkMatch ? linkMatch[1].trim() : '#';
                 const leetcodeLink = link !== '#' ? `[Ir a LeetCode](${link})` : '-';
                 
-                const relativePath = `./${folder}/${file}`.replace(/ /g, '%20');
+                // Se emplea la categoría del comentario. Si no existe, entonces se usa el nombre de la carpeta por defecto
+                const categoryName = categoryMatch ? categoryMatch[1].trim() : folder.replace(/^\d+_/, '').replace(/_/g, ' ');
                 
-                // se obtiene la extensión del archivo para determinar el lenguaje
+                const relativePath = `./${folder}/${file}`.replace(/ /g, '%20');
                 const ext = path.extname(file);
                 const langName = languageMap[ext];
 
