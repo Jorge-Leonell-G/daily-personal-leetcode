@@ -30,7 +30,8 @@ function generateTable() {
         return fs.statSync(path.join(repoRoot, item)).isDirectory() && /^\d+_/.test(item);
     });
 
-    let dailyCount = 1; 
+    // array vacio para almacenar los datos de los problemas antes de ordenarlos
+    let problemsData = [];
 
     folders.forEach(folder => {
         const folderPath = path.join(repoRoot, folder);
@@ -52,31 +53,44 @@ function generateTable() {
             const categoryMatch = content.match(categoryRegex);
 
             if (problemMatch && difficultyMatch) {
-                // se evalua si el problema es tipo daily
                 const isDaily = dailyMatch && dailyMatch[1].trim().toLowerCase() === 'yes';
 
-                // Solo se procesa y agrega a la tabla si isDaily es verdadero
                 if (isDaily) {
                     const problem = problemMatch[1].trim();
                     const difficulty = difficultyMatch[1].trim();
-                    
-                    const date = dateMatch ? dateMatch[1].trim() : '-';
+                    const dateStr = dateMatch ? dateMatch[1].trim() : '-';
                     const link = linkMatch ? linkMatch[1].trim() : '#';
                     const leetcodeLink = link !== '#' ? `[Ir a LeetCode](${link})` : '-';
-                    
                     const categoryName = categoryMatch ? categoryMatch[1].trim() : folder.replace(/^\d+_/, '').replace(/_/g, ' ');
-                    
                     const relativePath = `./${folder}/${file}`.replace(/ /g, '%20');
                     const ext = path.extname(file);
                     const langName = languageMap[ext];
 
-                    // dailyCount al inicio de la fila 
-                    tableLines.push(`| ${dailyCount} | ${problem} | ${difficulty} | ${categoryName} | ${date} | [${langName}](${relativePath}) | ${leetcodeLink} |`);
-                    
-                    dailyCount++;
+                    // conversión de la fecha a timestamp para ordenamiento
+                    let timestamp = 0;
+                    if (dateStr !== '-') {
+                        const parts = dateStr.split('/');
+                        if (parts.length === 3) {
+                            // JS Date usa (Año, Mes [0-11], Día)
+                            timestamp = new Date(parts[2], parts[1] - 1, parts[0]).getTime();
+                        }
+                    }
+
+                    problemsData.push({
+                        problem, difficulty, categoryName, dateStr, timestamp, langName, relativePath, leetcodeLink
+                    });
                 }
             }
         });
+    });
+
+    // ordenamiento por fecha (timestamp) de menor a mayor
+    problemsData.sort((a, b) => a.timestamp - b.timestamp);
+
+    // se recorre el array ordenado para generar las filas de la tabla
+    problemsData.forEach((data, index) => {
+        const count = index + 1;
+        tableLines.push(`| ${count} | ${data.problem} | ${data.difficulty} | ${data.categoryName} | ${data.dateStr} | [${data.langName}](${data.relativePath}) | ${data.leetcodeLink} |`);
     });
 
     return tableLines.join('\n');
