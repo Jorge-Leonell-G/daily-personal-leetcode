@@ -8,6 +8,7 @@ Colección personal de problemas de programación dentro de Leetcode, resueltos 
 | # | Problema | Dificultad | Categoría | Fecha | Lenguaje | Enlace |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 1 | 3418. Maximum Amount of Money Robot Can Earn | Medium | Array, Dynamic Programming | 01/04/2026 | [JavaScript](./05_Dynamic_Programming/3418-maximum-amount-money-robot.js) | [Ir a LeetCode](https://leetcode.com/problems/maximum-amount-of-money-robot-can-earn/description/) |
-| 2 | 2075. Decode the Slanted Ciphertext | Medium | String | 04/04/2026 | [JavaScript](./02_String/2075-decode-slanted-ciphertext.js) | [Ir a LeetCode](https://leetcode.com/problems/decode-the-slanted-ciphertext/description/) |
-| 3 | 0657. Robot Return to Origin | Easy | String | 05/04/2026 | [JavaScript](./02_String/0657-robot-return-origin.js) | [Ir a LeetCode](https://leetcode.com/problems/robot-return-to-origin/description/) |
+| 2 | 1848. Minimum Distance to the Target Element | Easy | Array | 02/04/2026 | [JavaScript](./01_Array/1848-minimum-distance-target.js) | [Ir a LeetCode](https://leetcode.com/problems/minimum-distance-to-the-target-element/description/) |
+| 3 | 2075. Decode the Slanted Ciphertext | Medium | String | 04/04/2026 | [JavaScript](./02_String/2075-decode-slanted-ciphertext.js) | [Ir a LeetCode](https://leetcode.com/problems/decode-the-slanted-ciphertext/description/) |
+| 4 | 0657. Robot Return to Origin | Easy | String | 05/04/2026 | [JavaScript](./02_String/0657-robot-return-origin.js) | [Ir a LeetCode](https://leetcode.com/problems/robot-return-to-origin/description/) |
 <!-- TABLE_END -->
