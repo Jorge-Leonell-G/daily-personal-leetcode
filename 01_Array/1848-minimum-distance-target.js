@@ -3,7 +3,7 @@
  * Difficulty: Easy
  * Category: Array
  * Daily: Yes
- * Date: 02/04/2026
+ * Date: 12/04/2026
  * Link: https://leetcode.com/problems/minimum-distance-to-the-target-element/description/
  * Time Complexity: O(n)
  * Space Complexity: O(1)
