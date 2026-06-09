@@ -5,8 +5,8 @@
  * Daily: Yes
  * Date: 17/04/2026
  * Link: https://leetcode.com/problems/minimum-absolute-distance-between-mirror-pairs/description/
- * Time Complexity: 
- * Space Complexity: 
+ * Time Complexity: O(n * m) donde n es el número de elementos en nums y m es el número de dígitos en el número más grande (debido a la inversión)
+ * Space Complexity: O(n) en el peor caso, si todos los números tienen reversos únicos almacenados en el mapa
  */
 
 /**
