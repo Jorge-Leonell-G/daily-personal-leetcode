@@ -12,4 +12,5 @@ Colección personal de problemas de programación dentro de Leetcode, resueltos 
 | 3 | 0657. Robot Return to Origin | Easy | String | 05/04/2026 | [JavaScript](./02_String/0657-robot-return-origin.js) | [Ir a LeetCode](https://leetcode.com/problems/robot-return-to-origin/description/) |
 | 4 | 1848. Minimum Distance to the Target Element | Easy | Array | 12/04/2026 | [JavaScript](./01_Array/1848-minimum-distance-target.js) | [Ir a LeetCode](https://leetcode.com/problems/minimum-distance-to-the-target-element/description/) |
 | 5 | 2515. Shortest Distance to Target String in a Circular Array | Easy | Array, String | 15/04/2026 | [JavaScript](./01_Array/2515-shortest-distance-target-string.js) | [Ir a LeetCode](https://leetcode.com/problems/shortest-distance-to-target-string-in-a-circular-array/description/) |
+| 6 | 3488. Closest Equal Element Queries | Medium | HashTable, Array | 16/04/2026 | [JavaScript](./03_HashTable/3488-closest-equal-element-queries.js) | [Ir a LeetCode](https://leetcode.com/problems/closest-equal-element-queries/description/) |
 <!-- TABLE_END -->
