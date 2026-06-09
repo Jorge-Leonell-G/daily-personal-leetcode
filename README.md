@@ -14,4 +14,5 @@ Colección personal de problemas de programación dentro de Leetcode, resueltos 
 | 5 | 2515. Shortest Distance to Target String in a Circular Array | Easy | Array, String | 15/04/2026 | [JavaScript](./01_Array/2515-shortest-distance-target-string.js) | [Ir a LeetCode](https://leetcode.com/problems/shortest-distance-to-target-string-in-a-circular-array/description/) |
 | 6 | 3488. Closest Equal Element Queries | Medium | HashTable, Array | 16/04/2026 | [JavaScript](./03_HashTable/3488-closest-equal-element-queries.js) | [Ir a LeetCode](https://leetcode.com/problems/closest-equal-element-queries/description/) |
 | 7 | 3761. Minimum Absolute Distance Between Mirror Pairs | Medium | HashTable, Array | 17/04/2026 | [JavaScript](./03_HashTable/3761-minimum-absolute-distance-mirror.js) | [Ir a LeetCode](https://leetcode.com/problems/minimum-absolute-distance-between-mirror-pairs/description/) |
+| 8 | 3783. Mirror Distance of an Integer | Easy | Math | 18/04/2026 | [JavaScript](./04_Math/3783-mirror-distance-integer.js) | [Ir a LeetCode](https://leetcode.com/problems/mirror-distance-of-an-integer/description/) |
 <!-- TABLE_END -->
