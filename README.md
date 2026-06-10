@@ -15,4 +15,5 @@ Colección personal de problemas de programación dentro de Leetcode, resueltos 
 | 6 | 3488. Closest Equal Element Queries | Medium | HashTable, Array | 16/04/2026 | [JavaScript](./03_HashTable/3488-closest-equal-element-queries.js) | [Ir a LeetCode](https://leetcode.com/problems/closest-equal-element-queries/description/) |
 | 7 | 3761. Minimum Absolute Distance Between Mirror Pairs | Medium | HashTable, Array | 17/04/2026 | [JavaScript](./03_HashTable/3761-minimum-absolute-distance-mirror.js) | [Ir a LeetCode](https://leetcode.com/problems/minimum-absolute-distance-between-mirror-pairs/description/) |
 | 8 | 3783. Mirror Distance of an Integer | Easy | Math | 18/04/2026 | [JavaScript](./04_Math/3783-mirror-distance-integer.js) | [Ir a LeetCode](https://leetcode.com/problems/mirror-distance-of-an-integer/description/) |
+| 9 | 1855. Maximum Distance Between a Pair of Values | Medium | Two Pointers | 19/04/2026 | [JavaScript](./16_TwoPointers/1855-maximum-distance-pair.js) | [Ir a LeetCode](https://leetcode.com/problems/maximum-distance-between-a-pair-of-values/description/) |
 <!-- TABLE_END -->
